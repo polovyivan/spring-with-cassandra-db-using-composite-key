@@ -1,0 +1,27 @@
+server:
+  port: 8001
+  servlet:
+    context-path: /spring-with-cassandra-db-using-composite-key
+
+spring:
+  application:
+    name: spring-with-cassandra-db-using-composite-key
+
+  cassandra:
+    contact-points: localhost:9042
+    keyspace-name: iot
+    cluster-name: tutorial-cluster
+    local-datacenter: datacenter1
+#    port: 9042
+#    username: cassandra
+#    password: cassandra
+
+logging:
+  level:
+    org:
+      springframework:
+        data:
+          cassandra:
+            core:
+              cql:
+                CqlTemplate: DEBUG
