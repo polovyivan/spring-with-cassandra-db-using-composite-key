@@ -16,8 +16,9 @@ public interface SensorEventsRepository extends CassandraRepository<SensorEventE
             SELECT * FROM sensor_events WHERE 
             account_name=:#{#accountName} AND 
             device_id=:#{#deviceId} AND
-            event_date = :#{#eventDate} AND 
-            event_id = :#{#eventId} 
+            event_date>=:#{#from} AND 
+            event_date<=:#{#to}
             """)
-    List<SensorEventEntity> findByKeyAccountNameAndKeyDeviceId(String accountName, UUID deviceId,  LocalDate eventDate, UUID eventId);
+    List<SensorEventEntity> findWithFilters(String accountName, UUID deviceId,  LocalDate from,
+            LocalDate to);
 }

@@ -39,33 +39,40 @@ public class SensorEventsController {
 
     @GetMapping("/with-filters")
     @ResponseStatus(HttpStatus.OK)
-    public List<SensorEventResponse> getEventsWithFilters(@RequestParam String accountName,
-            @RequestParam UUID deviceId, @RequestParam UUID eventId, @RequestParam LocalDate eventDate) {
-        return sensorEventsService.getWithFilters(accountName, deviceId,
-                eventId, eventDate);
+    public List<SensorEventResponse> getEventsWithFilters(
+            @RequestParam String accountName,
+            @RequestParam UUID deviceId,
+            @RequestParam LocalDate from,
+            @RequestParam LocalDate to
+    ) {
+        return sensorEventsService.getWithFilters(accountName, deviceId, from, to);
     }
 
-    @GetMapping("/{accountName}/device/{deviceId}")
+    @GetMapping("/accounts/{accountName}/devices/{deviceId}")
     @ResponseStatus(HttpStatus.OK)
-    public List<SensorEventResponse> getEventsByDeviceId(@PathVariable String accountName,
+    public List<SensorEventResponse> getEventsByDeviceId(
+            @PathVariable String accountName,
             @PathVariable UUID deviceId) {
         return sensorEventsService.getEventsByDeviceId(accountName, deviceId);
     }
 
-    @GetMapping("/{accountName}/device/{deviceId}/eventDate/{eventDate}/event/{eventId}")
+    @GetMapping("/accounts/{accountName}/devices/{deviceId}/eventDates/{eventDate}/events/{eventId}")
     @ResponseStatus(HttpStatus.OK)
-    public SensorEventResponse getEventById(@PathVariable String accountName,
-            @PathVariable UUID deviceId, @PathVariable LocalDate eventDate, @PathVariable UUID eventId) {
-        return sensorEventsService.getEventsByDeviceId(accountName, deviceId,
-                eventDate, eventId);
+    public SensorEventResponse getEventById(
+            @PathVariable String accountName,
+            @PathVariable UUID deviceId,
+            @PathVariable LocalDate eventDate,
+            @PathVariable UUID eventId) {
+        return sensorEventsService.getEventsByDeviceId(accountName, deviceId, eventDate, eventId);
     }
 
-    @DeleteMapping("/{accountName}/device/{deviceId}/eventDate/{eventDate}/event/{eventId}")
+    @DeleteMapping("/accounts/{accountName}/devices/{deviceId}/eventDates/{eventDate}/events/{eventId}")
     @ResponseStatus(HttpStatus.NO_CONTENT)
-    public void deleteEventById(@PathVariable String accountName,
-            @PathVariable UUID deviceId, @PathVariable LocalDate eventDate, @PathVariable UUID eventId) {
-        sensorEventsService.deleteEventsByDeviceId(accountName, deviceId,
-                eventDate, eventId);
+    public void deleteEventById(
+            @PathVariable String accountName,
+            @PathVariable UUID deviceId,
+            @PathVariable LocalDate eventDate,
+            @PathVariable UUID eventId) {
+        sensorEventsService.deleteEventsByDeviceId(accountName, deviceId, eventDate, eventId);
     }
-
 }

@@ -1,14 +1,12 @@
 package com.polovyi.ivan.tutorials.service;
 
 import com.polovyi.ivan.tutorials.dto.entity.SensorEventEntity;
-import com.polovyi.ivan.tutorials.dto.entity.SensorEventEntityCompositeKey;
 import com.polovyi.ivan.tutorials.dto.request.SensorEventRequest;
 import com.polovyi.ivan.tutorials.dto.response.SensorEventResponse;
 import com.polovyi.ivan.tutorials.repository.MapIdSensorEventsRepository;
 import com.polovyi.ivan.tutorials.repository.SensorEventsRepository;
 import java.time.LocalDate;
 import java.util.List;
-import java.util.Map;
 import java.util.UUID;
 import java.util.stream.Collectors;
 import lombok.RequiredArgsConstructor;
@@ -38,10 +36,10 @@ public class SensorEventsService {
                 .collect(Collectors.toList());
     }
 
-    public List<SensorEventResponse> getWithFilters(String accountName, UUID deviceId, UUID eventId, LocalDate eventDate) {
-
-        return sensorEventsRepository.findByKeyAccountNameAndKeyDeviceId(
-                        accountName, deviceId, eventDate, eventId).stream()
+    public List<SensorEventResponse> getWithFilters(String accountName, UUID deviceId, LocalDate from,
+            LocalDate to) {
+        return sensorEventsRepository.findWithFilters(
+                        accountName, deviceId, from, to).stream()
                 .map(SensorEventResponse::valueOf)
                 .collect(Collectors.toList());
     }
@@ -59,7 +57,6 @@ public class SensorEventsService {
                 .with("deviceId", deviceId)
                 .with("eventDate", eventDate)
                 .with("eventId", eventId);
-        System.out.println("mapId = " + mapId);
         return mapIdSensorEventsRepository.findById(mapId).map(SensorEventResponse::valueOf).orElse(null);
     }
 
@@ -69,7 +66,6 @@ public class SensorEventsService {
                 .with("deviceId", deviceId)
                 .with("eventDate", eventDate)
                 .with("eventId", eventId);
-        System.out.println("mapId = " + mapId);
-         mapIdSensorEventsRepository.findById(mapId).ifPresent(e->mapIdSensorEventsRepository.deleteById(mapId));
+        mapIdSensorEventsRepository.findById(mapId).ifPresent(e -> mapIdSensorEventsRepository.deleteById(mapId));
     }
 }
