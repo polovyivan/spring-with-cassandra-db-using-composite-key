@@ -1,0 +1,239 @@
+{
+	"info": {
+		"_postman_id": "590b0c16-f061-4c53-a3b7-72547fa35510",
+		"name": "spring-with-cassandra-db-using-composite-key",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "9825253"
+	},
+	"item": [
+		{
+			"name": "sensor-events",
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json",
+						"type": "text",
+						"disabled": true
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "    {\n        \"accountName\": \"Account1\",\n        \"deviceId\": \"89a35059-b6c1-4d28-9fae-d8a7abd896f5\",\n        \"eventId\": \"30c37065-c791-464f-b347-28a1ad128a33\",\n        \"eventDate\": \"2022-10-25\",\n        \"closestDevicesIp\": [\n            \"29.208.191.134\",\n            \"29.208.191.135\"\n        ],\n        \"temperatures\": [\n            22,\n            24,\n            21,\n            20\n        ],\n        \"tags\": {\n            \"brand\": \"some_brand\",\n            \"type\": \"whether_sensor\"\n        },\n        \"latitude\": 48.955624,\n        \"longitude\": 30.025852,\n        \"pressure\":55,\n        \"humidity\": 85,\n        \"eventTime\": \"06:36:07\"\n    }",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:8001/spring-with-cassandra-db-using-composite-key/v1/sensor-events",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8001",
+					"path": [
+						"spring-with-cassandra-db-using-composite-key",
+						"v1",
+						"sensor-events"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "sensor-events",
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true
+			},
+			"request": {
+				"method": "GET",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"accountName\": \"accountName\"\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:8001/spring-with-cassandra-db-using-composite-key/v1/sensor-events",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8001",
+					"path": [
+						"spring-with-cassandra-db-using-composite-key",
+						"v1",
+						"sensor-events"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "sensor-events/with-filters",
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true
+			},
+			"request": {
+				"method": "GET",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"accountName\": \"accountName\"\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:8001/spring-with-cassandra-db-using-composite-key/v1/sensor-events/with-filters?accountName=Account%231&deviceId=89a35059-b6c1-4d28-9fae-d8a7abd896f5&from=2022-10-25&to=2022-10-25&eventId=df88cefb-e0b5-4e7a-ab39-a01498b0b909",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8001",
+					"path": [
+						"spring-with-cassandra-db-using-composite-key",
+						"v1",
+						"sensor-events",
+						"with-filters"
+					],
+					"query": [
+						{
+							"key": "accountName",
+							"value": "Account%231"
+						},
+						{
+							"key": "deviceId",
+							"value": "89a35059-b6c1-4d28-9fae-d8a7abd896f5"
+						},
+						{
+							"key": "from",
+							"value": "2022-10-25"
+						},
+						{
+							"key": "to",
+							"value": "2022-10-25"
+						},
+						{
+							"key": "eventId",
+							"value": "df88cefb-e0b5-4e7a-ab39-a01498b0b909"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "sensor-events/{accountName}/event/{deviceId}",
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true
+			},
+			"request": {
+				"method": "GET",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"accountName\": \"accountName\"\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:8001/spring-with-cassandra-db-using-composite-key/v1/sensor-events/accounts/:accountName/devices/:deviceId",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8001",
+					"path": [
+						"spring-with-cassandra-db-using-composite-key",
+						"v1",
+						"sensor-events",
+						"accounts",
+						":accountName",
+						"devices",
+						":deviceId"
+					],
+					"variable": [
+						{
+							"key": "accountName",
+							"value": "Account%231"
+						},
+						{
+							"key": "deviceId",
+							"value": "89a35059-b6c1-4d28-9fae-d8a7abd896f5"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "sensor-events/{accountName}/event/{deviceId}",
+			"request": {
+				"method": "DELETE",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"accountName\": \"accountName\"\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:8001/spring-with-cassandra-db-using-composite-key/v1/sensor-events/accounts/:accountName/devices/:deviceId/eventDates/:eventDate/events/:eventId",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8001",
+					"path": [
+						"spring-with-cassandra-db-using-composite-key",
+						"v1",
+						"sensor-events",
+						"accounts",
+						":accountName",
+						"devices",
+						":deviceId",
+						"eventDates",
+						":eventDate",
+						"events",
+						":eventId"
+					],
+					"variable": [
+						{
+							"key": "accountName",
+							"value": "Account1"
+						},
+						{
+							"key": "deviceId",
+							"value": "89a35059-b6c1-4d28-9fae-d8a7abd896f5"
+						},
+						{
+							"key": "eventDate",
+							"value": "2022-10-25"
+						},
+						{
+							"key": "eventId",
+							"value": "30c37065-c791-464f-b347-28a1ad128a33"
+						}
+					]
+				}
+			},
+			"response": []
+		}
+	]
+}
